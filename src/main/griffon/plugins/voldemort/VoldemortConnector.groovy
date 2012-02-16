@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2011-2012 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,37 +29,10 @@ import org.slf4j.LoggerFactory
  * @author Andres Almiray
  */
 @Singleton
-final class VoldemortConnector {
+final class VoldemortConnector implements VoldemortProvider {
     private bootstrap
 
     private static final Logger LOG = LoggerFactory.getLogger(VoldemortConnector)
-
-    static void enhance(MetaClass mc) {
-        mc.withVoldemort = {Closure closure ->
-            StoreClientHolder.instance.withVoldemort('default', closure)
-        }
-        mc.withVoldemort << {String clientName, Closure closure ->
-            StoreClientHolder.instance.withVoldemort(clientName, closure)
-        }
-        mc.withVoldemort << {CallableWithArgs callable ->
-            StoreClientHolder.instance.withVoldemort('default', callable)
-        }
-        mc.withVoldemort << {String clientName, CallableWithArgs callable ->
-            StoreClientHolder.instance.withVoldemort(clientName, callable)
-        }
-        mc.withVoldemortStore << {String storeName, Closure closure ->
-            StoreClientHolder.instance.withVoldemortStore('default', storeName, closure)
-        }
-        mc.withVoldemortStore << {String clientName, String storeName, Closure closure ->
-            StoreClientHolder.instance.withVoldemortStore(clientName, storeName, closure)
-        }
-        mc.withVoldemortStore << {String storeName, CallableWithArgs callable ->
-            StoreClientHolder.instance.withVoldemortStore('default', storeName, callable)
-        }
-        mc.withVoldemortStore << {String clientName, String storeName, CallableWithArgs callable ->
-            StoreClientHolder.instance.withVoldemortStore(clientName, storeName, callable)
-        }
-    }
 
     Object withVoldemortStore(String clientName = 'default', String storeName, Closure closure) {
         StoreClientHolder.instance.withVoldemortStore(clientName, storeName, closure)
