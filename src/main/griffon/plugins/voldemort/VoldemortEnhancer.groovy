@@ -26,7 +26,7 @@ final class VoldemortEnhancer {
     private static final Logger LOG = LoggerFactory.getLogger(VoldemortEnhancer)
 
     private VoldemortEnhancer() {}
-    
+
     static void enhance(MetaClass mc, VoldemortProvider provider = StoreClientHolder.instance) {
         if(LOG.debugEnabled) LOG.debug("Enhancing $mc with $provider")
         mc.withVoldemort = {Closure closure ->

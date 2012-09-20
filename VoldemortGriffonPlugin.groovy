@@ -19,9 +19,9 @@
  */
 class VoldemortGriffonPlugin {
     // the plugin version
-    String version = '0.2'
+    String version = '0.3'
     // the version or versions of Griffon the plugin is designed for
-    String griffonVersion = '0.9.5 > *'
+    String griffonVersion = '1.1.0 > *'
     // the other plugins this plugin depends on
     Map dependsOn = [:]
     // resources that are included in plugin packaging
@@ -63,19 +63,20 @@ giving you access to a `voldemort.client.StoreClientFactory` object, with which 
 to make calls to the database. Remember to make all database calls off the EDT
 otherwise your application may appear unresponsive when doing long computations
 inside the EDT.
+
 These methods are aware of multiple databases. If no databaseName is specified when calling
 it then the default database will be selected. Here are two example usages, the first
 queries against the default database while the second queries a database whose name has
 been configured as 'internal'
 
-	package sample
-	class SampleController {
-	    def queryAllDatabases = {
-	        withVoldemort { clientName, clientFactory -> ... }
-	        withVoldemort('internal') { clientName, clientFactory -> ... }
-	    }
-	}
-	
+    package sample
+    class SampleController {
+        def queryAllDatabases = {
+            withVoldemort { clientName, clientFactory -> ... }
+            withVoldemort('internal') { clientName, clientFactory -> ... }
+        }
+    }
+
 These methods are also accessible to any component through the singleton `griffon.plugins.voldemort.VoldemortConnector`.
 You can inject these methods to non-artifacts via metaclasses. Simply grab hold of a particular metaclass and call
 `VoldemortEnhancer.enhance(metaClassInstance, voldemortProviderInstance)`.
@@ -144,9 +145,9 @@ fails regardless of the arguments it receives
         Object withVoldemort(String clientName = 'default', Closure closure) { null }
         public <T> T withVoldemort(String clientName = 'default', CallableWithArgs<T> callable) { null }
         Object withVoldemortStore(String clientName = 'default', String storeName, Closure closure) { null }
-        public <T> T withVoldemortStore(String clientName = 'default', String storeName, CallableWithArgs<T> callable) { null }     
+        public <T> T withVoldemortStore(String clientName = 'default', String storeName, CallableWithArgs<T> callable) { null }
     }
-    
+
 This implementation may be used in the following way
 
     class MyServiceTests extends GriffonUnitTestCase {

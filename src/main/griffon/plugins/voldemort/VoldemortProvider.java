@@ -29,7 +29,7 @@ public interface VoldemortProvider {
     <T> T withVoldemort(CallableWithArgs<T> callable);
 
     <T> T withVoldemort(String clientName, CallableWithArgs<T> callable);
-    
+
     Object withVoldemortStore(String storeName, Closure closure);
 
     Object withVoldemortStore(String clientName, String storeName, Closure closure);

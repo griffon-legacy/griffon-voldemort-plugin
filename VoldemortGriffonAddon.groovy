@@ -37,7 +37,7 @@ class VoldemortGriffonAddon {
         }
     }
 
-    def events = [
+    Map events = [
         ShutdownStart: { app ->
             ConfigObject config = VoldemortConnector.instance.createConfig(app)
             VoldemortConnector.instance.disconnect(app, config)

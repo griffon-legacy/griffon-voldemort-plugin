@@ -73,17 +73,17 @@ class StoreClientHolder implements VoldemortProvider {
 
     void setStoreClientFactory(String clientName = 'default', StoreClientFactory storeClientFactory) {
         if(isBlank(clientName)) clientName = 'default'
-        storeStoreClientFactory(clientName, storeClientFactory)       
+        storeStoreClientFactory(clientName, storeClientFactory)
     } 
-   
+
     boolean isStoreClientFactoryConnected(String clientName) {
         if(isBlank(clientName)) clientName = 'default'
         retrieveStoreClientFactory(clientName) != null
     }
-    
+
     void disconnectStoreClientFactory(String clientName) {
         if(isBlank(clientName)) clientName = 'default'
-        storeStoreClientFactory(clientName, null)        
+        storeStoreClientFactory(clientName, null)
     }
 
     private StoreClient fetchStoreClient(String clientName, String storeName) {
